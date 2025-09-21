@@ -1,0 +1,13 @@
+[project]
+name = "py_semver"
+version = "0.0.0"  # Set this to the last released version or "0.0.0" for new projects
+description = "Python semantic release practice"
+
+[tool.semantic_release]
+commit_parser = "conventional"
+version_toml = ["pyproject.toml:project.version"]
+
+[tool.semantic_release.branches.main]
+match = "(main|master)"
+prerelease_token = "rc"
+prerelease = false
