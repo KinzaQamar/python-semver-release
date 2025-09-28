@@ -28,9 +28,9 @@ jobs:
       - name: run version/publish command
         env:
           # REQUIRED: Provides authentication to create/push tags
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          semantic-release version
+          semantic-release version --no-changelog
           semantic-release publish
       # - name: run version command
       #   run: semantic-release version
