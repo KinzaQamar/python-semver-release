@@ -5,6 +5,7 @@ on:
     branches:
       - main
 
+
 permissions:
   contents: write
 
@@ -13,22 +14,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Set up uv and python
-        uses: astral-sh/setup-uv@v6
-        with:
-          python-version: 3.13
+      - name: install semantic release 
+        run: python3 -m pip install python-semantic-release
+      
+      - name: check installation of pysemver
+        run: python-semantic-release --version 
 
-      - name: Run semantic-release
+      - name: run version/publish command
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: | #shell
-          sr() {
-            uvx --from="python-semantic-release@9.21.1" semantic-release "$@"
-          }
+          # REQUIRED: Provides authentication to create/push tags
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          semantic-release version
+          semantic-release publish
+      # - name: run version command
+      #   run: semantic-release version
+      #
+      # - name: run publish command
+      #   env:
+      #     # REQUIRED: Provides authentication to create/push tags
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   run: semantic-release publish 
 
-          sr version
-          sr publish
