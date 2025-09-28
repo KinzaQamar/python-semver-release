@@ -1,6 +1,6 @@
 [project]
 name = "py_semver"
-version = "0.0.0"  # Set this to the last released version or "0.0.0" for new projects
+version = "1.0.0"  # Set this to the last released version or "0.0.0" for new projects
 description = "Python semantic release practice"
 
 [tool.semantic_release]
